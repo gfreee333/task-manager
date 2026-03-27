@@ -189,7 +189,7 @@ mvn clean test
 | GET | `/manager/api/tasks/users/creator/{creatorId}` | Задачи создателя |
 | PUT | `/manager/api/tasks/{id}` | Обновление задачи |
 | DELETE | `/manager/api/tasks/{id}` | Удаление задачи |
-
+---
 ---
 ## 📬 Примеры запросов и ответов
 Ниже приведены основные эндпоинты с примерами запросов и ожидаемыми ответами.
