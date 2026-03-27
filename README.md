@@ -196,6 +196,112 @@ mvn clean test
 
 ### Пользователи
 
+#### Создание пользователя
+**POST** `/manager/api/users`
+
+**Тело запроса:**
+```json
+{
+  "email": "Teа2у22st@test.com",
+  "password": "password123",
+  "firstName": "Олег",
+  "lastName": "Филипов",
+  "role": "USER"
+}
+```
+**Ответ (201 Created):
+```json
+{
+  "email": "Teа2у22st@test.com",
+  "firstName": "Олег",
+  "lastName": "Филипов",
+  "role": "USER",
+  "createdAt": "2026-03-27T17:52:34.855+00:00",
+  "updatedAt": "2026-03-27T17:52:34.855+00:00"
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
