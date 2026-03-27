@@ -256,12 +256,88 @@ mvn clean test
   "updatedAt": "2026-03-27T17:52:30.363+00:00"
 }
 ```
-
-
-
-
-
-
+#### 4) Получение пользователя по email
+**GET запрос** `/manager/api/users/email/{email}`
+**Пример:** `/manager/api/users/email/Test@test.com`
+**Ответ:** http status - 200 ok
+```json
+{
+  "email": "Test@test.com",
+  "firstName": "Иван",
+  "lastName": "Чухманов",
+  "role": "USER",
+  "createdAt": "2026-03-27T15:37:21.652+00:00",
+  "updatedAt": "2026-03-27T15:37:21.652+00:00"
+}
+```
+#### 5) Получение пользователей по роли
+**GET запрос** `/manager/api/users?role={role}`
+**Пример:** `/manager/api/users?role=USER`
+**Ответ:** http status - 200 ok
+```json
+[
+  {
+    "email": "Teа22уst@test.com",
+    "firstName": "Иван",
+    "lastName": "Чухманов",
+    "role": "USER",
+    "createdAt": "2026-03-27T16:55:50.067+00:00",
+    "updatedAt": "2026-03-27T16:55:50.067+00:00"
+  }
+]
+```
+#### 6) Получение пользователей по имени и фамилии (частичное совпадение)
+**GET запрос** `/manager/api/users?firstName={firstName}&lastName={lastName}`
+**Пример:** `/manager/api/users?firstName=Иван&lastName=Чухманов`
+**Ответ:** http statis - 200 ok
+```json
+[
+  {
+    "email": "Ivan@test.com",
+    "firstName": "Иван",
+    "lastName": "Чухманов",
+    "role": "USER",
+    "createdAt": "2026-03-27T15:35:52.082+00:00",
+    "updatedAt": "2026-03-27T15:35:52.082+00:00"
+  },
+  {
+    "email": "Test@test.com",
+    "firstName": "Иван",
+    "lastName": "Чухманов",
+    "role": "USER",
+    "createdAt": "2026-03-27T15:37:21.652+00:00",
+    "updatedAt": "2026-03-27T15:37:21.652+00:00"
+  }
+]
+```
+#### 7) Обновление пользователя
+**PUT запрос:** `/manager/api/users/{id}`
+**Пример:** `/manager/api/users/1`
+**Тело запроса:**
+```json
+{
+  "email": "updated@test.com",
+  "password": "newPassword123",
+  "firstName": "Иван",
+  "lastName": "Чухманов",
+  "role": "ADMIN"
+}
+```
+**Ответ:** http status 200 ok 
+```json
+{
+  "email": "updated@test.com",
+  "firstName": "Иван",
+  "lastName": "Чухманов",
+  "role": "ADMIN",
+  "createdAt": "2026-03-27T15:35:52.082+00:00",
+  "updatedAt": "2026-03-27T15:35:52.082+00:00"
+}
+```
+#### 8) Удаление пользователя
+**DELETE запрос:** `/manager/api/users/{id}`
+**Пример:** `/manager/api/users/1`
+**Ответ:** HTTP/1.1 204 No Content
 
 
 
