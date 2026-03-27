@@ -343,23 +343,230 @@ mvn clean test
 **Пример:** `/manager/api/users/1`
 **Ответ:** HTTP/1.1 204 No Content
 
+
+
 ---
 ### Проекты
 ---
 1) Создание проекта
+**POST запрос:** `manager/api/projects`
+**Тело запроса:**
+ ```json
+  {
+  "name": "Новый проект222222",
+  "description": "Описание проекта22222",
+  "status": "ACTIVE",
+  "ownerId": 2
+}
+  ```
+**Ответ:** http status 201 created
+  ```json
+  {
+    "id": 2,
+    "name": "Новый проект222222",
+    "description": "Описание проекта22222",
+    "status": "ACTIVE",
+    "ownerId": 2,
+    "ownerFirstName": null,
+    "ownerLastName": null,
+    "createdAt": "2026-03-27T17:52:50.088+00:00",
+    "updatedAt": "2026-03-27T17:52:50.088+00:00"
+}
+  ```
 2) Полеучение всех проектов
+**GET запрос:** `manager/api/projects`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "name": "Новый проект",
+        "description": "Описание проекта",
+        "status": "ACTIVE",
+        "createdAt": "2026-03-27T16:56:16.064+00:00",
+        "updatedAt": "2026-03-27T16:56:16.064+00:00"
+    }
+]
+  ```
 3) Получение проектов по статусу
+**GET запрос:** `/manager/api/projects`
+**Пример:** `/manager/api/projects?status=ACTIVE`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "name": "Новый проект",
+        "description": "Описание проекта",
+        "status": "ACTIVE",
+        "createdAt": "2026-03-27T16:56:16.064+00:00",
+        "updatedAt": "2026-03-27T16:56:16.064+00:00"
+    }
+]
+  ```
 4) Получение проекта по id
+**запрос:** `/manager/api/projects/{id}`
+**Пример:** `/manager/api/projects/1`
+**Ответ:** http status 200 ok
+  ```json
+  {
+    "id": 1,
+    "name": "Новый проект",
+    "description": "Описание проекта",
+    "status": "ACTIVE",
+    "ownerId": 1,
+    "ownerFirstName": "Иван",
+    "ownerLastName": "Чухманов",
+    "createdAt": "2026-03-27T16:56:16.064+00:00",
+    "updatedAt": "2026-03-27T16:56:16.064+00:00"
+}
+  ```
 5) Получение проектов, где пользователь владелец
+**GET запрос:** `/manager/api/projects/owner/{id}`
+**Пример:** `/manager/api/projects/owner/2`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 2,
+        "name": "Обновленное название проекта",
+        "description": "Обновленное описание проекта",
+        "status": "COMPLETED",
+        "createdAt": "2026-03-27T17:52:50.088+00:00",
+        "updatedAt": "2026-03-27T17:58:03.260+00:00"
+    }
+]
+  ```
 6) Обновление проекта
+**PUT запрос:** `/manager/api/projects/{id}`
+**Пример:** `/manager/api/projects/2`
+**Тело запроса:**
+  ```json
+  {
+  "name": "Обновленное название проекта",
+  "description": "Обновленное описание проекта",
+  "status": "COMPLETED",
+  "ownerId": 2
+}
+  ```
+**Ответ:** http status 200 ok
+  ```json
+ {
+    "id": 2,
+    "name": "Обновленное название проекта",
+    "description": "Обновленное описание проекта",
+    "status": "COMPLETED",
+    "ownerId": 2,
+    "ownerFirstName": "Олег",
+    "ownerLastName": "Филипов",
+    "createdAt": "2026-03-27T17:52:50.088+00:00",
+    "updatedAt": "2026-03-27T17:57:55.995+00:00"
+}
+  ```
 7) Получение проектов, где пользователь участник
+**GET запрос:** `/manager/api/projects/participant/{id}`
+**Пример:** `/manager/api/projects/participant/3`
+**Тело запроса:**
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "name": "Новый проект",
+        "description": "Описание проекта",
+        "status": "ACTIVE",
+        "createdAt": "2026-03-27T16:56:16.064+00:00",
+        "updatedAt": "2026-03-27T16:56:16.064+00:00"
+    }
+]
+  ```
 8) Удаление проектов
+**DELETE запрос:** `/manager/api/projects/{id}`
+**Пример:** `/manager/api/projects/2`
+**Ответ:** http status 204 no content
+  ```json
+   HTTP/1.1 204 No Content
+  ```
 9) Добавление пользователя в проект
-10) Удаление пользователя из проекта 
+**PUT запрос:** `/manager/api/projects/{id}/users/{userId}`
+**Пример:** `/manager/api/projects/2/users/1`
+**Тело запроса:**
+```json
+{
+  "name": "Новый проект",
+  "description": "Описание проекта",
+  "status": "ACTIVE",
+  "ownerId": 1
+}
+```
+**Ответ:** http status 200 ok
+  ```json
+{
+  "id": 2,
+  "name": "Новый проект",
+  "description": "Описание проекта",
+  "status": "ACTIVE",
+  "ownerId": 1,
+  "ownerFirstName": "Иван",
+  "ownerLastName": "Петров",
+  "createdAt": "2026-03-27T18:00:00.000+00:00",
+  "updatedAt": "2026-03-27T18:00:00.000+00:00"
+}
+  ```   
+11) Удаление пользователя из проекта
+**DELETE запрос:** `/manager/api/projects/{id}/users/{userId}`
+**Пример:** `/manager/api/projects/1/users/3`
+**Тело запроса:**
+**Ответ:** http status 204 no content
+```json
+  HTTP/1.1 204 No Content
+```
 11) Проверка является ли пользователь участником проекта
+**GET запрос:** `/manager/api/projects/{id}/users/{userId}`
+**Пример:** `/manager/api/projects/2/users/2`
+**Ответ:** http status 200 ok
+```json
+true
+```
 12) Получение списка участников проекта
+**GET запрос:** `/manager/api/projects/{id}/participants`
+**Пример:** `/manager/api/projects/2/participants`
+**Ответ:** http status 200 ok
+ ```json
+  [
+    {
+        "userId": 1,
+        "firstName": "Олег",
+        "lastName": "Филипов",
+        "email": "Teа22222у22st@test.com",
+        "role": "USER"
+    }
+]
+ ```
 13) Получение списка проектов пользователя
-
+**GET запрос:** `/manager/api/projects/users/{userId}`
+**Пример:** `/manager/api/projects/users/1`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "name": "Новый проект222222",
+        "description": "Описание проекта22222",
+        "status": "ACTIVE",
+        "createdAt": "2026-03-27T17:52:44.971+00:00",
+        "updatedAt": "2026-03-27T17:52:44.971+00:00"
+    },
+    {
+        "id": 2,
+        "name": "Новый проект222222",
+        "description": "Описание проекта22222",
+        "status": "ACTIVE",
+        "createdAt": "2026-03-27T17:52:50.088+00:00",
+        "updatedAt": "2026-03-27T17:52:50.088+00:00"
+    }
+]
+  ```
 ---
 ### Задачи
 ---
