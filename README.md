@@ -348,7 +348,7 @@ mvn clean test
 ---
 ### Проекты
 ---
-1) Создание проекта
+#### 1) Создание проекта
 **POST запрос:** `manager/api/projects`
 **Тело запроса:**
  ```json
@@ -373,7 +373,7 @@ mvn clean test
     "updatedAt": "2026-03-27T17:52:50.088+00:00"
 }
   ```
-2) Полеучение всех проектов
+#### 2) Полеучение всех проектов
 **GET запрос:** `manager/api/projects`
 **Ответ:** http status 200 ok
   ```json
@@ -388,7 +388,7 @@ mvn clean test
     }
 ]
   ```
-3) Получение проектов по статусу
+#### 3) Получение проектов по статусу
 **GET запрос:** `/manager/api/projects`
 **Пример:** `/manager/api/projects?status=ACTIVE`
 **Ответ:** http status 200 ok
@@ -404,7 +404,7 @@ mvn clean test
     }
 ]
   ```
-4) Получение проекта по id
+#### 4) Получение проекта по id
 **запрос:** `/manager/api/projects/{id}`
 **Пример:** `/manager/api/projects/1`
 **Ответ:** http status 200 ok
@@ -421,7 +421,7 @@ mvn clean test
     "updatedAt": "2026-03-27T16:56:16.064+00:00"
 }
   ```
-5) Получение проектов, где пользователь владелец
+#### 5) Получение проектов, где пользователь владелец
 **GET запрос:** `/manager/api/projects/owner/{id}`
 **Пример:** `/manager/api/projects/owner/2`
 **Ответ:** http status 200 ok
@@ -437,7 +437,7 @@ mvn clean test
     }
 ]
   ```
-6) Обновление проекта
+#### 6) Обновление проекта
 **PUT запрос:** `/manager/api/projects/{id}`
 **Пример:** `/manager/api/projects/2`
 **Тело запроса:**
@@ -463,7 +463,7 @@ mvn clean test
     "updatedAt": "2026-03-27T17:57:55.995+00:00"
 }
   ```
-7) Получение проектов, где пользователь участник
+#### 7) Получение проектов, где пользователь участник
 **GET запрос:** `/manager/api/projects/participant/{id}`
 **Пример:** `/manager/api/projects/participant/3`
 **Тело запроса:**
@@ -480,14 +480,14 @@ mvn clean test
     }
 ]
   ```
-8) Удаление проектов
+#### 8) Удаление проектов
 **DELETE запрос:** `/manager/api/projects/{id}`
 **Пример:** `/manager/api/projects/2`
 **Ответ:** http status 204 no content
   ```json
    HTTP/1.1 204 No Content
   ```
-9) Добавление пользователя в проект
+#### 9) Добавление пользователя в проект
 **PUT запрос:** `/manager/api/projects/{id}/users/{userId}`
 **Пример:** `/manager/api/projects/2/users/1`
 **Тело запроса:**
@@ -513,7 +513,7 @@ mvn clean test
   "updatedAt": "2026-03-27T18:00:00.000+00:00"
 }
   ```   
-11) Удаление пользователя из проекта
+#### 10) Удаление пользователя из проекта
 **DELETE запрос:** `/manager/api/projects/{id}/users/{userId}`
 **Пример:** `/manager/api/projects/1/users/3`
 **Тело запроса:**
@@ -521,14 +521,14 @@ mvn clean test
 ```json
   HTTP/1.1 204 No Content
 ```
-11) Проверка является ли пользователь участником проекта
+#### 11) Проверка является ли пользователь участником проекта
 **GET запрос:** `/manager/api/projects/{id}/users/{userId}`
 **Пример:** `/manager/api/projects/2/users/2`
 **Ответ:** http status 200 ok
 ```json
 true
 ```
-12) Получение списка участников проекта
+#### 12) Получение списка участников проекта
 **GET запрос:** `/manager/api/projects/{id}/participants`
 **Пример:** `/manager/api/projects/2/participants`
 **Ответ:** http status 200 ok
@@ -543,7 +543,7 @@ true
     }
 ]
  ```
-13) Получение списка проектов пользователя
+#### 13) Получение списка проектов пользователя
 **GET запрос:** `/manager/api/projects/users/{userId}`
 **Пример:** `/manager/api/projects/users/1`
 **Ответ:** http status 200 ok
