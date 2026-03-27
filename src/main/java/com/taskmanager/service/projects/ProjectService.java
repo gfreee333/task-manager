@@ -16,10 +16,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class ProjectService {
     private static final Logger log = LoggerFactory.getLogger(ProjectService.class);
     private final ProjectsRepository projectsRepository;
@@ -237,16 +239,21 @@ public class ProjectService {
         return users.stream().map(projectMapper::toParticipantDto)
                 .collect(Collectors.toList());
     }
-    // todo 13: Получение списка проектов пользователя //
+    // todo 13: Получение списка проектов пользователя // ГОТОВ + ПОКРЫТ ТЕСТАМИ
     public List<ProjectResponseSummaryDTO> getUserProjects(Long id){
-        // Проверка есть ли такой пользователь
-        Users user = usersRepository.findById(id).orElseThrow(()->{
-            log.error("Пользователя с id:{} не существует", id);
-            return new ResourceNotFoundException("Пользователь", id);
-        });
-        List<Projects> projects = user.getProjects();
-        log.info("Получен список проектов у пользователя с id: {}", id);
-        return projects.stream().map(projectMapper::toProjectResponseSummaryDto)
+        log.info("Получение списка проектов пользователя с id: {}", id);
+        Users user = usersRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("Пользователь с id {} не найден", id);
+                    return new ResourceNotFoundException("Пользователь", id);
+                });
+        List<Projects> allProjects = new ArrayList<>(user.getProjects());
+        if (user.getParticipatedProjects() != null) {
+            allProjects.addAll(user.getParticipatedProjects());
+        }
+        log.info("Найдено {} проектов у пользователя {}", allProjects.size(), id);
+        return allProjects.stream()
+                .map(projectMapper::toProjectResponseSummaryDto)
                 .collect(Collectors.toList());
     }
 

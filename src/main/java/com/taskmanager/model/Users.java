@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.UniqueElements;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,6 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Email(message = "Не правильный формат ввода Email")
-    @UniqueElements(message = "Данный email уже зарегистрирован в базе")
     @NotNull(message = "Поле email не должно быть пустым")
     private String email;
     @NotNull(message = "Поле password не должно быть пустым")
@@ -44,10 +41,8 @@ public class Users {
             message = "Роль должна быть: ADMIN, USER или MANAGER")
     private String role;
     @CreationTimestamp
-    @NotNull(message = "Поле created_at не должно быть пустым")
     private Timestamp createdAt;
     @UpdateTimestamp
-    @NotNull(message = "Поле updated_at не должно быть пустым")
     private Timestamp updatedAt;
 
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

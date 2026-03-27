@@ -29,7 +29,7 @@ public class Tasks {
     @NotNull(message = "Описание задачи не должно быть пустым")
     private String description;
     @NotNull(message = "Поле status не должно быть пустым")
-    @Size(min = 5, max = 20, message = "Поле status должно содержать от 5 до 20 символов")
+    @Size(min = 4, max = 20, message = "Поле status должно содержать от 5 до 20 символов")
     @Pattern(regexp = "TODO|IN_PROGRESS|DONE")
     private String status;
     @NotNull(message = "Поле priority не должно быть пустым")
@@ -39,10 +39,8 @@ public class Tasks {
     @DateTimeFormat
     private Date dueDate;
     @CreationTimestamp
-    @NotNull(message = "Поле created_at не должно быть пустым")
     private Timestamp createdAt;
     @UpdateTimestamp
-    @NotNull(message = "Поле updated_at не должно быть пустым")
     private Timestamp updatedAt;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id") // Соединение по created_id

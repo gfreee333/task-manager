@@ -28,13 +28,11 @@ public class Projects {
             message = "Статус проекта должен быть ACTIVE, COMPLETED или ARCHIVED")
     private String status;
     @CreationTimestamp
-    @NotNull(message = "Поле updated_at не должно быть пустым")
     private Timestamp createdAt;
     @UpdateTimestamp
-    @NotNull(message = "Поле updated_at не должно быть пустым")
     private Timestamp updatedAt;
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private ArrayList<Tasks> tasks = new ArrayList<>(); // Соединение с tasks
+    private List<Tasks> tasks = new ArrayList<>(); // Соединение с tasks
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private Users owner;

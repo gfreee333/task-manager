@@ -28,14 +28,12 @@ public class TasksController {
     public ResponseEntity<TasksResponseDTO> createTask(@Valid @RequestBody TasksRequestDTO request){
         return ResponseEntity.status(HttpStatus.CREATED).body(tasksService.createTask(request));
     }
-
     // Todo 2: Получение задачи по id // ГОТОВ + ПОКРЫТ ТЕСТАМИ
     //  GET /manager/api/tasks/{id}
     @GetMapping("/{id}")
     public ResponseEntity<TasksResponseDTO> getTasksById(@Positive @PathVariable Long id){
         return ResponseEntity.ok(tasksService.getTaskById(id));
     }
-
     // Todo 3: // ГОТОВ + ПОКРЫТ ТЕСТАМИ
     //  3.1 Получение всех задач по статусу
     //  3.2 Получение всех задач по приоритету
@@ -75,7 +73,7 @@ public class TasksController {
         return ResponseEntity.ok(tasksService.getAllTaskByCreated(creatorId));
     }
 
-    // Todo 7: Удаление задачи // ГОТОВ + ПОКРЫТ ТЕСТАМИ
+    // Todo 7: Удаление задачу по id // ГОТОВ + ПОКРЫТ ТЕСТАМИ
     //  DELETE /manager/api/tasks/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTaskById(@Positive(message = "id задачи не может быть отрицательным")@PathVariable Long id){

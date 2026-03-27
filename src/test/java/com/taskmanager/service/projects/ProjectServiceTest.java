@@ -738,15 +738,20 @@ public class ProjectServiceTest {
     @Test
     @DisplayName("Успешное получение списка проектов пользователя")
     void getUserProjects_ReturnListSummaryDTO(){
+        // Подготовка: пользователь имеет 2 проекта как владелец и 2 проекта как участник
+        // Подготовка: пользователь имеет 2 проекта как владелец и 1 проект как участник
         user1.setProjects(List.of(project1, project2));
+        user1.setParticipatedProjects(List.of(project3));
         when(usersRepository.findById(CORRECT_ID)).thenReturn(Optional.of(user1));
         when(projectMapper.toProjectResponseSummaryDto(project1)).thenReturn(summaryProject1);
         when(projectMapper.toProjectResponseSummaryDto(project2)).thenReturn(summaryProject2);
+        when(projectMapper.toProjectResponseSummaryDto(project3)).thenReturn(summaryProject3);
         List<ProjectResponseSummaryDTO> result = projectService.getUserProjects(CORRECT_ID);
         assertThat(result).isNotNull();
-        verify(usersRepository, times(1)).findById(CORRECT_ID);
-        verify(projectMapper, times(1)).toProjectResponseSummaryDto(project1);
-        verify(projectMapper, times(1)).toProjectResponseSummaryDto(project2);
+        verify(usersRepository).findById(CORRECT_ID);
+        verify(projectMapper).toProjectResponseSummaryDto(project1);
+        verify(projectMapper).toProjectResponseSummaryDto(project2);
+        verify(projectMapper).toProjectResponseSummaryDto(project3);
     }
     // 2) Пользователя с данным id не существует
     @Test
