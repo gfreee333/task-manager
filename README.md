@@ -149,6 +149,37 @@ mvn clean test
 - **`TasksControllerTest`** – покрывает создание задач, получение по ID, фильтрацию по статусу/приоритету, обновление, удаление и бизнес-правило «исполнитель должен быть участником проекта».
 - **Сервисные тесты** (`UsersServiceTest`, `ProjectsServiceTest`, `TasksServiceTest`) – изолированно проверяют бизнес-логику с моками репозиториев. Каждый метод сервиса имеет позитивные и негативные сценарии.
 
+## 📚 API эндпоинты (основные)
+
+| Метод | Эндпоинт | Описание |
+|-------|----------|----------|
+| POST | `/manager/api/users` | Создание пользователя |
+| GET | `/manager/api/users/{id}` | Получение пользователя по ID |
+| GET | `/manager/api/users` | Получение всех пользователей (с фильтрацией `?role=...`, `?firstName=...&lastName=...`) |
+| GET | `/manager/api/users/email/{email}` | Получение пользователя по email |
+| PUT | `/manager/api/users/{id}` | Обновление пользователя |
+| DELETE | `/manager/api/users/{id}` | Удаление пользователя |
+| POST | `/manager/api/projects` | Создание проекта |
+| GET | `/manager/api/projects/{id}` | Получение проекта по ID |
+| GET | `/manager/api/projects?status=...` | Проекты по статусу |
+| GET | `/manager/api/projects/owner/{id}` | Проекты владельца |
+| GET | `/manager/api/projects/participant/{id}` | Проекты участника |
+| PUT | `/manager/api/projects/{id}` | Обновление проекта |
+| DELETE | `/manager/api/projects/{id}` | Удаление проекта |
+| PUT | `/manager/api/projects/{id}/users/{userId}` | Добавить участника |
+| DELETE | `/manager/api/projects/{id}/users/{userId}` | Удалить участника |
+| GET | `/manager/api/projects/{id}/participants` | Список участников проекта |
+| GET | `/manager/api/projects/users/{userId}` | Список проектов пользователя |
+| POST | `/manager/api/tasks` | Создание задачи |
+| GET | `/manager/api/tasks/{id}` | Получение задачи по ID |
+| GET | `/manager/api/tasks?status=...` | Задачи по статусу |
+| GET | `/manager/api/tasks?priority=...` | Задачи по приоритету |
+| GET | `/manager/api/tasks/projects/{projectId}` | Задачи проекта |
+| GET | `/manager/api/tasks/users/assignee/{assigneeId}` | Задачи исполнителя |
+| GET | `/manager/api/tasks/users/creator/{creatorId}` | Задачи создателя |
+| PUT | `/manager/api/tasks/{id}` | Обновление задачи |
+| DELETE | `/manager/api/tasks/{id}` | Удаление задачи |
+
 
 
 
