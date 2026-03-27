@@ -208,7 +208,7 @@ mvn clean test
   "role": "USER"
 }
 ```
-**Ответ:** (201 Created):
+**Ответ:** http status - 201 Created:
 ```json
 {
   "email": "Teа2у22st@test.com",
@@ -221,8 +221,41 @@ mvn clean test
 ```
 #### 2) Получение всех пользователей
 **GET запрос** `/manager/api/users`
-
-
+**Ответ:** http status - 200 oK
+```json
+[
+  {
+    "email": "Teа22222у22st@test.com",
+    "firstName": "Олег",
+    "lastName": "Филипов",
+    "role": "USER",
+    "createdAt": "2026-03-27T17:52:30.363+00:00",
+    "updatedAt": "2026-03-27T17:52:30.363+00:00"
+  },
+  {
+    "email": "Teа2у22st@test.com",
+    "firstName": "Олег",
+    "lastName": "Филипов",
+    "role": "USER",
+    "createdAt": "2026-03-27T17:52:34.855+00:00",
+    "updatedAt": "2026-03-27T17:52:34.855+00:00"
+  }
+]
+```
+#### 3) Получение пользователя по ID
+**GET запрос** `/manager/api/users/{id}`
+**Пример:** `/manager/api/users/1`
+**Ответ:** http status - 200 oK
+```json
+{
+  "email": "Teа22222у22st@test.com",
+  "firstName": "Олег",
+  "lastName": "Филипов",
+  "role": "USER",
+  "createdAt": "2026-03-27T17:52:30.363+00:00",
+  "updatedAt": "2026-03-27T17:52:30.363+00:00"
+}
+```
 
 
 
