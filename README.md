@@ -196,7 +196,7 @@ mvn clean test
 ### Пользователи
 ---
 #### 1) Создание пользователя
-**POST** `/manager/api/users`
+**POST запрос** `/manager/api/users`
 
 **Тело запроса:**
 ```json
@@ -208,7 +208,7 @@ mvn clean test
   "role": "USER"
 }
 ```
-**Ответ (201 Created):
+**Ответ:** (201 Created):
 ```json
 {
   "email": "Teа2у22st@test.com",
@@ -219,7 +219,8 @@ mvn clean test
   "updatedAt": "2026-03-27T17:52:34.855+00:00"
 }
 ```
-
+#### 2) Получение всех пользователей
+**GET запрос** `/manager/api/users`
 
 
 
