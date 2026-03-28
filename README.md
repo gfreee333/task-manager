@@ -926,4 +926,4 @@ true
 **Чухманов Иван**  
 - Telegram: @chuhmanov
 - Email: chuhmanovivan2002@gmail.com 
-- LinkedIn: https://hh.ru/resume/47d9be58ff1029516d0039ed1f6a7a47377036
+- HH.ru: https://hh.ru/resume/47d9be58ff1029516d0039ed1f6a7a47377036
