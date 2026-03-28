@@ -836,9 +836,94 @@ true
     "updatedAt": "2026-03-27T18:14:12.406+00:00"
 }
   ```
+---
+## ⚠️ Примеры неудачных запросов
+---
+### Пользователи 
+1) Попытка добавления дубликата email 
+**POST запрос:** `/manager/api/users`
+**Пример:** `/manager/api/users`
+**Тело запроса:**
+```json
+{
+  "email": "Teа2у22st@test.com",
+  "password": "password123",
+  "firstName": "Олег",
+  "lastName": "Филипов",
+  "role": "USER"
+}
+```
+**Ответ:** http status 409 conflict
+  ```json
+{
+    "message": "Пользователь с Email Teа2у22st@test.com уже существует",
+    "status": 409
+}
+  ```
+### Проекты
+1) Ошибка валидации при обновление проекта 
+**PUT запрос:** `/manager/api/projects/{id}`
+**Пример:** `/manager/api/projects/2`
+**Тело запроса:**
+ ```json
+{
+  "name": "Об",
+  "description": "Об",
+  "status": "COфау",
+  "ownerId": -2
+}
+  ```
+2) Ошибка валидации при получение проекта 
+**GET запрос:** `/manager/api/projects/{id}`
+**Пример:** `/manager/api/projects/1000`
+**Ответ:** http status 404 not found
+  ```json
+{
+    "message": "Проект с id {} не найден с id 1000 не найден",
+    "status": 404
+}
+  ```
 
+### Задачи
+### 1) Ошибки валидации при создание задачи
+**POST запрос:** `/manager/api/tasks`
+**Пример:** `/manager/api/tasks`
+**Тело запроса:**
+ ```json
+{
+  "title": null,
+  "description": null,
+  "priority": null,
+  "status": null,
+  "dueDate": "2026-04-15",
+  "assigneeId": null,
+  "projectId": null,
+  "createdById": null
+}
+  ```
+**Ответ:** http status 400 Bad Request
+  ```json
+{
+    "message": "title: Название задачи не должно быть пустым, projectId: id проекта обязательно, createdById: id создателя задачи обязательно, priority: Приоритет не должен быть пустым, assigneeId: id исполнителя обязательно, status: Статус не должен быть пустым",
+    "status": 400
+}
+  ```
+#### 2) Попытка удалить не существующую задачу
+**DELETE запрос:** `/manager/api/tasks/{id}`
+**Пример:** `/manager/api/tasks/1000`
+**Ответ:** http status 404 not found
+  ```json
+{
+    "message": "Задача с id 1000 не найден",
+    "status": 404
+}
+  ```
+---
 
-
-
-
-   
+---
+## 👤 Автор
+---
+**Чухманов Иван**  
+- Telegram: @chuhmanov
+- Email: chuhmanovivan2002@gmail.com 
+- LinkedIn: https://hh.ru/resume/47d9be58ff1029516d0039ed1f6a7a47377036
