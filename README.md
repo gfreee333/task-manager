@@ -341,8 +341,10 @@ mvn clean test
 #### 8) Удаление пользователя
 **DELETE запрос:** `/manager/api/users/{id}`
 **Пример:** `/manager/api/users/1`
-**Ответ:** HTTP/1.1 204 No Content
-
+**Ответ:** http status 204 No Content
+```json
+HTTP/1.1 204 No Content
+```
 
 
 ---
@@ -570,89 +572,270 @@ true
 ---
 ### Задачи
 ---
-1) Создание задачи
-2) Получение задачи по id
-3) Получение всех задач по статусу
-4) Получение всех задач по приориету
-5) Получение всех задач
-6) Получение всех задач по проекту
-7) Получение задач назначенных пользователю
-8) Получение задач создателю
-9) Удаление задачи по id
-10) Обновление задачи по id 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### 1) Создание задачи
+**POST запрос:** `/manager/api/tasks`
+**Тело запроса:** `/manager/api/tasks`
+ ```json
+ {
+  "title": "Реализовать функционал аутентификации",
+  "description": "Добавить JWT и эндпоинты логина/регистрации",
+  "priority": "MED",
+  "status": "DONE",
+  "dueDate": "2026-04-15",
+  "assigneeId": 1,
+  "projectId": 2,
+  "createdById": 1
+}
+  ```
+**Ответ:** http status 201 created
+  ```json
+  {
+    "id": 2,
+    "title": "Реализовать функционал аутентификации",
+    "description": "Добавить JWT и эндпоинты логина/регистрации",
+    "status": "DONE",
+    "priority": "MED",
+    "dueDate": "2026-04-15",
+    "assigneeId": 1,
+    "assigneeFirstName": "Олег",
+    "assigneeLastName": "Филипов",
+    "createdById": 1,
+    "createdByFirstName": "Олег",
+    "createdByLastName": "Филипов",
+    "projectId": 2,
+    "projectName": "Обновленное название проекта",
+    "createdAt": "2026-03-27T18:27:43.381+00:00",
+    "updatedAt": "2026-03-27T18:27:43.381+00:00"
+}
+  ```
+   
+#### 2) Получение задачи по id
+**GET запрос:** `/manager/api/tasks/{id}`
+**Пример:** `/manager/api/tasks/1`
+**Ответ:** http status 200 ok
+  ```json
+  {
+    "id": 1,
+    "title": "Реализовать функционал аутентификации",
+    "description": "Добавить JWT и эндпоинты логина/регистрации",
+    "status": "TODO",
+    "priority": "HIGH",
+    "dueDate": "2026-04-15",
+    "assigneeId": 1,
+    "assigneeFirstName": "Олег",
+    "assigneeLastName": "Филипов",
+    "createdById": 1,
+    "createdByFirstName": "Олег",
+    "createdByLastName": "Филипов",
+    "projectId": 2,
+    "projectName": "Обновленное название проекта",
+    "createdAt": "2026-03-27T18:14:12.405+00:00",
+    "updatedAt": "2026-03-27T18:14:12.406+00:00"
+}
+  ```
+#### 3) Получение всех задач по статусу
+**GET запрос:** `/manager/api/tasks`
+**Пример:** `/manager/api/tasks?status=DONE`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 2,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "DONE",
+        "priority": "MED",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    }
+]
+  ```
+#### 4) Получение всех задач по приориету
+**GET запрос:** `/manager/api/tasks`
+**Пример:** `/manager/api/tasks?priority=HIGH`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "TODO",
+        "priority": "HIGH",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    }
+]
+  ```
+#### 5) Получение всех задач
+**GET запрос:** `/manager/api/tasks`
+**Пример:** `/manager/api/tasks`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "TODO",
+        "priority": "HIGH",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    },
+    {
+        "id": 2,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "DONE",
+        "priority": "MED",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    }
+]
+  ```
+#### 6) Получение всех задач по проекту
+**GET запрос:** `/manager/api/tasks/projects/{id}`
+**Пример:** `/manager/api/tasks/projects/2`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "TODO",
+        "priority": "HIGH",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    },
+    {
+        "id": 2,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "DONE",
+        "priority": "MED",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    }
+]
+  ```
+#### 7) Получение задач назначенных пользователю
+**GET запрос:** `/manager/api/tasks/users/assignee/{assigneeId}`
+**Пример:** `/manager/api/tasks/users/assignee/1`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "TODO",
+        "priority": "HIGH",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    },
+    {
+        "id": 2,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "DONE",
+        "priority": "MED",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    }
+]
+  ```
+#### 8) Получение задач создателя
+**GET запрос:** `/manager/api/tasks/users/creator/{creatorId}`
+**Пример:** `/manager/api/tasks/users/creator/1`
+**Ответ:** http status 200 ok
+  ```json
+  [
+    {
+        "id": 1,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "TODO",
+        "priority": "HIGH",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    },
+    {
+        "id": 2,
+        "title": "Реализовать функционал аутентификации",
+        "description": "Добавить JWT и эндпоинты логина/регистрации",
+        "status": "DONE",
+        "priority": "MED",
+        "assigneeId": 1,
+        "assigneeFirstName": "Олег",
+        "projectName": "Обновленное название проекта",
+        "dueDate": "2026-04-15"
+    }
+]
+  ```
+#### 9) Удаление задачи по id
+**DELETE запрос:** `/manager/api/tasks/{id}`
+**Пример:** `/manager/api/tasks/2`
+**Ответ:** http status 204 no content
+ ```json
+ HTTP/1.1 204 No Content
+ ```
+#### 10) Обновление задачи по id 
+**PUT запрос:** `/manager/api/tasks/{id}`
+**Пример:** `/manager/api/tasks/1`
+**Тело запроса:**
+ ```json
+ {
+  "title": "Обновлённая задача: внедрить OAuth2",
+  "description": "Использовать Google OAuth для входа",
+  "priority": "MED",
+  "status": "IN_PROGRESS",
+  "dueDate": "2026-04-20",
+  "assigneeId": 2,
+  "projectId": 1,
+  "createdById": 1
+}
+  ```
+**Ответ:** http status 200 ok
+  ```json
+  {
+    "id": 1,
+    "title": "Обновлённая задача: внедрить OAuth2",
+    "description": "Использовать Google OAuth для входа",
+    "status": "IN_PROGRESS",
+    "priority": "MED",
+    "dueDate": "2026-04-20",
+    "assigneeId": 1,
+    "assigneeFirstName": "Олег",
+    "assigneeLastName": "Филипов",
+    "createdById": 1,
+    "createdByFirstName": "Олег",
+    "createdByLastName": "Филипов",
+    "projectId": 2,
+    "projectName": "Обновленное название проекта",
+    "createdAt": "2026-03-27T18:14:12.405+00:00",
+    "updatedAt": "2026-03-27T18:14:12.406+00:00"
+}
+  ```
 
 
 
